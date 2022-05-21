@@ -1,0 +1,24 @@
+---
+title: "Visualização de Regressão Linear"
+subtitle: "Visualização dos dados de uma regressão - R"
+output: html_document
+---
+
+A EDA (*Exploratory Data Analysis*) é essencial para "materializar" os dados que estamos trabalhando para o leitor. O artigo de hoje é justamente para a visualização de dados em uma Regressão Linear simples.
+
+> Equação de uma regressão linear simples
+
+```{r setup, warning=FALSE}
+## Bibliotecas utilizadas
+library(ggside)
+library(tidyverse)
+library(tidyquant)
+library(readr)
+```
+
+Caso alguma biblioteca não esteja instalada, você utilizar o código abaixo:
+
+> *install.packages("biblioteca")*
+
+Para a regressão utilizamos duas séries temporais, os histórico do índice Ibovespa e o índice S&P 500, ambos com histórico de 3 anos.
+
