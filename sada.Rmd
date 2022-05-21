@@ -13,7 +13,7 @@ A EDA (*Exploratory Data Analysis*) é essencial para "materializar" os dados qu
 library(ggside)
 library(tidyverse)
 library(tidyquant)
-library(readr)
+library(readxl)
 ```
 
 Caso alguma biblioteca não esteja instalada, você utilizar o código abaixo:
@@ -21,4 +21,19 @@ Caso alguma biblioteca não esteja instalada, você utilizar o código abaixo:
 > *install.packages("biblioteca")*
 
 Para a regressão utilizamos duas séries temporais, os histórico do índice Ibovespa e o índice S&P 500, ambos com histórico de 3 anos.
+
+O preço é uma função dos retornos, neste sentido é lógico pensar em fazer a regressão entre as duas séries utilizando os retornos ao invés do valor absoluto do índice. Portanto vamos tratar os dados removendo os valores nulos e calcular os retornos.
+
+```{r}
+df <- read_excel('economatica.xlsx', skip = 3)
+names(df) <- c('Data', 'Ibov', 'Sp500') ## renomeando colunas
+
+df <- df %>%
+  transform(Ibov = as.numeric(Ibov),
+            Sp500 = as.numeric(Sp500))
+
+```
+
+list.files()
+colnames(df)
 
