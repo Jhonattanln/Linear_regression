@@ -30,17 +30,19 @@ O preço é uma função dos retornos, neste sentido é lógico pensar em fazer 
 ```{r}
 ## Importando dados
 df <- read_excel('economatica.xlsx', skip = 3)
-names(df) <- c('Data', 'Ibov', 'Sp500') ## renomeando colunas
+names(df) <- c('Data', 'Ibov', 'Sp500', 'Dolar') ## renomeando colunas
 
 df <- df %>%
   transform(Ibov = as.numeric(Ibov),
-            Sp500 = as.numeric(Sp500)) %>%
+            Sp500 = as.numeric(Sp500),
+            Dolar = as.numeric(Dolar)) %>%
   na.omit(df) ## Removendo valores nulos
 
 ## Calculando os retornos
 df <- df %>%
   mutate(Ibov_ret = (Ibov/lag(Ibov)-1)*100,
-         Sp500_ret = (Sp500/lag(Sp500)-1)*100)
+         Sp500_ret = (Sp500/lag(Sp500)-1)*100,
+         Dolar_ret = (Dolar/lag(Dolar)-1)*100)
 ```
 
 Podemos agora plotar o gráfico de dispersão entre as duas séries.
@@ -72,8 +74,9 @@ df %>%
 Agora podemos de fato rodar uma regressão entre as duas variáveis.
 
 ```{r}
-model <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(Ibov_ret ~ Sp500_ret, data = df)
+model_ln <- linear_reg() %>%
+  set_engine('lm') %>%
+  fit(Ibov_ret~Sp500_ret+Dolar_ret, data = df)
 
+check_model(model_ln)
 ```
