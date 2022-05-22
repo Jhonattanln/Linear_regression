@@ -13,8 +13,10 @@ A EDA (*Exploratory Data Analysis*) é essencial para "materializar" os dados qu
 library(ggside)
 library(ggplot2)
 library(tidyverse)
+library(tidymodels)
 library(tidyquant)
 library(readxl)
+library(performance)
 ```
 
 Caso alguma biblioteca não esteja instalada, você utilizar o código abaixo:
@@ -65,5 +67,13 @@ df %>%
        subtitle = 'Retornos diários',
        x = 'Ibovespa',
        y = 'S&P 500')
+
+```
+Agora podemos de fato rodar uma regressão entre as duas variáveis.
+
+```{r}
+model <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(Ibov_ret ~ Sp500_ret, data = df)
 
 ```
