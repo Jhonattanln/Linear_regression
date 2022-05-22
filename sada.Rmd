@@ -70,7 +70,30 @@ df %>%
        x = 'Ibovespa',
        y = 'S&P 500')
 
+df %>%
+  ggplot(aes(x = Ibov_ret, y = Dolar_ret))+
+  geom_point(size = 2, alpha = 0.30, position = 'jitter')+
+  stat_smooth(method = 'lm', color = 'black')+
+  geom_xsidedensity(aes(y = after_stat(density), fill = 'Ibov'),
+                   alpha = 1.5,
+                   size = 1,
+                   position = 'stack')+
+  geom_ysidedensity(aes(x = after_stat(density), fill = 'Dólar'),
+                    alpha = 1.5,
+                    size = 1,
+                    position = 'stack')+
+  scale_color_tq()+
+  scale_fill_tq()+
+  theme_tq()+
+  theme(ggside.panel.scale.x = 0.4,
+        ggside.panel.scale.y = 0.4)+
+  labs(title = 'Ibovespa x Dólar',
+       subtitle = 'Retornos diários',
+       x = 'Ibovespa',
+       y = 'Dólar')
+
 ```
+
 Agora podemos de fato rodar uma regressão entre as duas variáveis.
 
 ```{r}
