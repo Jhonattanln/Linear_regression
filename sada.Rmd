@@ -1,7 +1,9 @@
 ---
 title: "Visualização de Regressão Linear"
-subtitle: "Visualização dos dados de uma regressão - R"
-output: html_document
+subtitle: Visualização dos dados de uma regressão - R
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 A EDA (*Exploratory Data Analysis*) é essencial para "materializar" os dados que estamos trabalhando para o leitor. O artigo de hoje é justamente para a visualização de dados em uma Regressão Linear simples.
